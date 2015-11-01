@@ -10,7 +10,7 @@ grid.  When a specific playlist is selected, only songs from that playlist sho
 ~~2. Songs should be displayed in a data grid control that shows each song’s title, artist, album, and genre.  ~~ 
 
 ~~3. When a song is selected, a detail pane should display details about the song including a picture of the album cover which
-is obtained from last.fm.    ~~
+is obtained from last.fm. ~~
 
 ~~4. A song can be played by selecting the song in the data grid pressing the Play button or by right‐clicking the song and
 selecting “Play” from the context menu.  The Stop button should stop play.  Other buttons that pause, change the
@@ -50,8 +50,8 @@ when viewing a playlist.~~
 
 ~~13. You must use the MusicLib library which will be supplied to you for separating the UI code from the business logic.~~
 
-#Additional Requirements
-Each additional requirement is worth 5 points:
+Extra credit
+
 1. Add the ability to rename and delete a playlist.  The user should be able to right‐click a playlist and select “Rename” from
 the context menu.  Then a dialog box should display which allows the user to rename the playlist.  Make sure you only
 change the playlist name if the user supplies a valid playlist (no blanks or identically named playlists).  A “Delete” option
