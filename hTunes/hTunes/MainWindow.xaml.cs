@@ -47,6 +47,7 @@ namespace hTunes
             }
 
             initializeContextMenus();
+            playlistListBox.SelectedItem = playlistListBox.Items[0];
             populateDatagridWithAllMusic();
         }
 
@@ -88,12 +89,14 @@ namespace hTunes
         {  
             // Bind the data source
             musicDatagrid.ItemsSource =  musicLib.Songs.DefaultView;
+            musicDatagrid.IsReadOnly = false;
             musicDatagrid.ContextMenu = allMusicMenu;
         }
 
         public void populateDatagridWithPlaylist(string pl)
         {
             musicDatagrid.ItemsSource = musicLib.SongsForPlaylist(pl).DefaultView;
+            musicDatagrid.IsReadOnly = true;
             musicDatagrid.ContextMenu = playlistMenu;
         }
 
@@ -102,9 +105,26 @@ namespace hTunes
 
         }
 
+        //http://stackoverflow.com/questions/10315188/open-file-dialog-and-select-a-file-using-wpf-controls-and-c-sharp
         private void openButton_Click(object sender, RoutedEventArgs e)
         {
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
 
+            // Set filter for file extension and default file extension 
+            dlg.DefaultExt = ".mp3";
+            dlg.Filter = "Audio Files (*.wav;*.mp3;*.m4a;*.wma)|*.wav;*.mp3;*.m4a;*.wma";
+
+            // Display OpenFileDialog by calling ShowDialog method 
+            Nullable<bool> result = dlg.ShowDialog();
+
+            // Get the selected file name and display in a TextBox 
+            if (result == true)
+            {
+                // Open document 
+                string filename = dlg.FileName;
+                musicLib.AddSong(filename);
+                populateDatagridWithAllMusic();
+            }
         }
 
         private void aboutButton_Click(object sender, RoutedEventArgs e)
@@ -168,6 +188,11 @@ namespace hTunes
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             musicLib.Save();
+        }
+
+        private void ShowButton_Click(object sender, RoutedEventArgs e)
+        {
+            musicLib.PrintAllTables();
         }
 
     }

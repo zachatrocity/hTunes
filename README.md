@@ -17,13 +17,13 @@ selecting “Play” from the context menu.  The Stop button should stop play.
 volume, or advance to the next song would be helpful but are not required.  When a song is finished playing, ideally your
 app should advance to the next song in the list, but this is not a requirement.~~
 
-5. A toolbar should be used instead of a menu.  It should have a button for adding a song, adding a new playlist, and
-showing the About dialog box.
+~~5. A toolbar should be used instead of a menu.  It should have a button for adding a song, adding a new playlist, and
+showing the About dialog box.~~
 
-6. The program should allow songs to be added to the listing of songs by launching an open dialog box and allowing the
+~~6. The program should allow songs to be added to the listing of songs by launching an open dialog box and allowing the
 user to select a song.  Provide a filter that by default shows .mp3, .m4a,.wma, and .wav files in the open file dialog box.  
 After selecting a song, the program should read the metadata stored in the music file (if available), add the song to the
-data grid, and select/highlight the song (so the user can see it among the list of potentially hundreds of songs).   
+data grid, and select/highlight the song (so the user can see it among the list of potentially hundreds of songs).   ~~
 
 7. The program should allow the user to create playlists in a manner similar to iTunes. The user should be able to create a
 new playlist by selecting a New Playlist button from the toolbar.  Songs can be added to a playlist by dragging them from
@@ -41,8 +41,8 @@ as the app’s .exe.  The file should be loaded when the app is first executed
 the file should be saved whenever a change is made to a song or playlist, but you should only save it once when the app
 terminates.)~~
 
-10. Song information can be modified directly in the data grid when viewing All Music.  Song info should not be editable
-when viewing a playlist.
+~~10. Song information can be modified directly in the data grid when viewing All Music.  Song info should not be editable
+when viewing a playlist.~~
 
 ~~11. The main window should be resizable, and the contents should stretch/shrink to fit the size of the window.~~
 
