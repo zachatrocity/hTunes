@@ -76,7 +76,12 @@ namespace hTunes
 
         private void PlayButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if (musicDatagrid.SelectedIndex != -1)
+            {
+                var songToPlay = (Song)musicDatagrid.SelectedCells[0].Item;
+                player.SoundLocation = songToPlay.Filename;
+                player.Play();
+            }
         }
 
         private void StopButton_Click(object sender, RoutedEventArgs e)
