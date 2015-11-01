@@ -12,10 +12,10 @@ grid.  When a specific playlist is selected, only songs from that playlist sho
 ~~3. When a song is selected, a detail pane should display details about the song including a picture of the album cover which
 is obtained from last.fm.    ~~
 
-4. A song can be played by selecting the song in the data grid pressing the Play button or by right‐clicking the song and
+~~4. A song can be played by selecting the song in the data grid pressing the Play button or by right‐clicking the song and
 selecting “Play” from the context menu.  The Stop button should stop play.  Other buttons that pause, change the
 volume, or advance to the next song would be helpful but are not required.  When a song is finished playing, ideally your
-app should advance to the next song in the list, but this is not a requirement.
+app should advance to the next song in the list, but this is not a requirement.~~
 
 5. A toolbar should be used instead of a menu.  It should have a button for adding a song, adding a new playlist, and
 showing the About dialog box.
