@@ -22,7 +22,6 @@ namespace hTunes
     public partial class MainWindow : Window
     {
         public MusicLib musicLib = new MusicLib();
-        System.Media.SoundPlayer player = new System.Media.SoundPlayer();
         ContextMenu allMusicMenu;
         ContextMenu playlistMenu;
         public MainWindow()
@@ -138,8 +137,16 @@ namespace hTunes
             if (musicDatagrid.SelectedIndex != -1)
             {
                 var songToPlay = musicDatagrid.SelectedItem as DataRowView;
-                player.SoundLocation = songToPlay.Row.ItemArray[4].ToString();
-                player.Play();
+                player.Source = new Uri(songToPlay.Row.ItemArray[4].ToString());
+                try
+                {
+                    player.Play();
+                }
+                catch
+                {
+                    Console.WriteLine("File may not exist");
+                }
+                
             }
         }
 
@@ -152,7 +159,7 @@ namespace hTunes
         {
             var songToPlay = musicDatagrid.SelectedItem as DataRowView;
 
-            player.SoundLocation = songToPlay.Row.ItemArray[4].ToString();
+            player.Source = new Uri(songToPlay.Row.ItemArray[4].ToString());
             try
             {
                 player.Play();

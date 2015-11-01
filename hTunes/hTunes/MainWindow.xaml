@@ -3,6 +3,32 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="hTunes" Height="450" Width="750" Icon="icon.png"
         Closing="Window_Closing">
+    <Window.Resources>
+        <ControlTemplate x:Key="MusicButton" TargetType="Button">
+            <Border Name="Border" BorderThickness="2" CornerRadius="5"
+                Background="ForestGreen">
+                <Border.Effect>
+                    <DropShadowEffect Color="Black" Direction="320" ShadowDepth="3" BlurRadius="5" Opacity="0.5" />
+                </Border.Effect>
+                <ContentPresenter HorizontalAlignment="Center"
+                              VerticalAlignment="Center"                                 
+                              TextBlock.FontWeight="Bold"  
+                              TextBlock.Foreground="Black"
+                              Content="{TemplateBinding Content}">
+                </ContentPresenter>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="Border" Property="Effect">
+                        <Setter.Value>
+                            <DropShadowEffect Color="Black" Direction="320" ShadowDepth="0" BlurRadius="5" Opacity="0.5" />
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150" />
@@ -14,7 +40,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
-
+        <MediaElement x:Name="player" Visibility="Hidden" LoadedBehavior="Manual"></MediaElement>
         <StackPanel Grid.Column="0" Grid.ColumnSpan="2">
             <ToolBar HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="40">
                 <Button x:Name="openButton" Height="32" VerticalAlignment="Top" Width="75" ToolTip="Open..." Click="openButton_Click">
@@ -87,13 +113,13 @@
                 </Grid.RowDefinitions>
 
                 <StackPanel Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <Button Content="Play" Click="PlayButton_Click"></Button>    
+                    <Button Content="Play" Click="PlayButton_Click" Template="{StaticResource MusicButton}"></Button>    
                 </StackPanel>
                 <StackPanel Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <Button Content="Stop" Click="StopButton_Click"></Button>
+                    <Button Content="Stop" Click="StopButton_Click" Template="{StaticResource MusicButton}"></Button>
                 </StackPanel>
                 <StackPanel Grid.Column="3" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <Button Content="Show" Click="ShowButton_Click"></Button>
+                    <Button Content="Show" Click="ShowButton_Click" Template="{StaticResource MusicButton}"></Button>
                 </StackPanel>
             </Grid>
         </StackPanel>
