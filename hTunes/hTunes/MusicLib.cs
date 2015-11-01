@@ -102,6 +102,39 @@ namespace hTunes
             // http://stackoverflow.com/questions/1750464/how-to-read-and-write-id3-tags-to-an-mp3-in-c
             TagLib.File file = TagLib.File.Create(filename);
 
+            //get image url
+            string imageurl = "";
+            string url = "http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=e1d7cac3d825c39c69e1e0f2a73ca7f8&artist=" + WebUtility.UrlEncode(file.Tag.AlbumArtists[0]) + "&track=" + WebUtility.UrlEncode(file.Tag.Title);
+            try
+            {
+               HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
+               using (WebResponse response = request.GetResponse())
+               {
+                  Stream strm = response.GetResponseStream();
+                  using (XmlTextReader reader = new XmlTextReader(strm))
+                  {
+                     while (reader.Read())
+                     {
+                        if (reader.NodeType == XmlNodeType.Element)
+                        {
+                           //Console.WriteLine(reader.Name);
+                           //Console.WriteLine(reader.ReadString());
+                           if (reader.Name == "image")
+                           {
+                              if (reader.GetAttribute("size") == "medium")
+                                 imageurl = reader.ReadString();
+                           }
+                        }
+                     }
+                  }
+               }   
+            }
+            catch (WebException e)
+            {
+               // A 400 response is returned when the song is not in their library
+               Console.WriteLine("Error: " + e.Message);
+            }
+
             Song s = new Song
             {
                 Title = file.Tag.Title,
@@ -109,7 +142,9 @@ namespace hTunes
                 Album = file.Tag.Album,
                 Genre = file.Tag.Genres[0],
                 Length = file.Properties.Duration.Minutes + ":" + file.Properties.Duration.Seconds,
-                Filename = filename
+                Filename = filename,
+                AboutUrl = "http://www.last.fm/music/" + WebUtility.UrlEncode(file.Tag.AlbumArtists[0]) + "/" + WebUtility.UrlEncode(file.Tag.Album),
+                AlbumImageUrl = imageurl
             };
 
             AddSong(s);
