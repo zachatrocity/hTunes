@@ -69,7 +69,8 @@ namespace hTunes
 
         private void aboutButton_Click(object sender, RoutedEventArgs e)
         {
-
+            About abt = new About();
+            abt.ShowDialog();
         }
 
         private void PlayButton_Click(object sender, RoutedEventArgs e)
