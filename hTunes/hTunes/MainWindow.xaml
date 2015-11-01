@@ -56,9 +56,10 @@
             </ToolBar>
         </StackPanel>
 
-        <ListBox x:Name="playlistListBox" Margin="10,0,10,10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" />
+        <ListBox x:Name="playlistListBox" Margin="10,0,10,10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" AllowDrop="False"/>
 
-        <DataGrid  Grid.Column="1" Grid.Row="1" SelectionMode="Single" AutoGenerateColumns="False" x:Name="musicDatagrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" CanUserAddRows="False">
+        <DataGrid  Grid.Column="1" Grid.Row="1" SelectionMode="Single" AutoGenerateColumns="False" x:Name="musicDatagrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" CanUserAddRows="False"
+                   MouseMove="musicDatagrid_MouseMove" PreviewMouseLeftButtonDown="musicDatagrid_PreviewMouseLeftButtonDown">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding id}" Visibility="Hidden"/>
                 <DataGridTextColumn Binding="{Binding title}" Header="Title"/>

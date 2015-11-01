@@ -38,6 +38,7 @@ namespace hTunes
             {
                 ListBoxItem pl = new ListBoxItem();
                 pl.Content = play;
+                pl.AllowDrop = true;
                 pl.MouseLeftButtonUp += (obj, e) => { 
                     var playlist = obj as ListBoxItem;
                     populateDatagridWithPlaylist(playlist.Content.ToString()); 
@@ -228,5 +229,27 @@ namespace hTunes
             tb.Text = "Search...";
         }
 
+        private Point startPoint;
+        private void musicDatagrid_MouseMove(object sender, MouseEventArgs e)
+        {
+            Point mousePos = e.GetPosition(null);
+            Vector diff = startPoint - mousePos;
+
+            //start drag-drop if mouse has moved far enough
+            if (e.LeftButton == MouseButtonState.Pressed &&
+                (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance ||
+                Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance))
+            {
+                //initiate dragging the text from the textbox
+                DragDrop.DoDragDrop(musicDatagrid, musicDatagrid.SelectedItem, DragDropEffects.Copy);
+            }
+        }
+
+        private void musicDatagrid_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            //store mouse position
+            startPoint = e.GetPosition(null);
+        }
+    }
     }
 }
