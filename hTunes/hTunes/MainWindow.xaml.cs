@@ -195,5 +195,31 @@ namespace hTunes
             musicLib.PrintAllTables();
         }
 
+        private void SearchBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+            string search = tb.Text;
+
+            if (playlistListBox.SelectedIndex == 0)
+            {
+                //filter all music
+                DataTable filtered = musicLib.Songs;
+                filtered.DefaultView.RowFilter = " title like '%" + search + "%' or artist like '%" + search + "%' or album like '%" + search + "%' or genre like '%" + search + "%'";
+                musicDatagrid.ItemsSource = filtered.DefaultView;
+            }
+        }
+
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+            tb.Text = "";
+        }
+
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+            tb.Text = "Search...";
+        }
+
     }
 }

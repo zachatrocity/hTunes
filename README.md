@@ -59,5 +59,5 @@ should also be available from the context menu that deletes the playlist.
 
 2. Use a Control Template to alter the look and behavior of the Play and Stop buttons.
 
-3. Allow the user to enter a search string. As the string is being entered, the song list should be populated with any song
-whose title, artist, album, or genre match any part of the search string.  An empty search string should yield all songs.  
+~~3. Allow the user to enter a search string. As the string is being entered, the song list should be populated with any song
+whose title, artist, album, or genre match any part of the search string.  An empty search string should yield all songs.  ~~
