@@ -39,6 +39,13 @@
                 <DataGridTextColumn Binding="{Binding album}" Header="Album"/>
                 <DataGridTextColumn Binding="{Binding genre}" Header="Genre"/>
             </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Play" Click="PlaySongFromMenu_Click"></MenuItem>
+                    <Separator></Separator>
+                    <MenuItem Header="Remove"></MenuItem>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
             <DataGrid.RowDetailsTemplate>
                 <DataTemplate>
                     <Border Background="AliceBlue">

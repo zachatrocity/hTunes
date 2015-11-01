@@ -46,9 +46,10 @@ when viewing a playlist.
 
 ~~11. The main window should be resizable, and the contents should stretch/shrink to fit the size of the window.~~
 
-12. There should be an About dialog box that identifies the programmers.
+~~12. There should be an About dialog box that identifies the programmers.~~
 
-13. You must use the MusicLib library which will be supplied to you for separating the UI code from the business logic.
+~~13. You must use the MusicLib library which will be supplied to you for separating the UI code from the business logic.~~
+
 #Additional Requirements
 Each additional requirement is worth 5 points:
 1. Add the ability to rename and delete a playlist.  The user should be able to right‐click a playlist and select “Rename” from

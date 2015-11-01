@@ -22,6 +22,7 @@ namespace hTunes
     public partial class MainWindow : Window
     {
         public MusicLib musicLib = new MusicLib();
+        System.Media.SoundPlayer player = new System.Media.SoundPlayer();
         public MainWindow()
         {
             InitializeComponent();
@@ -80,6 +81,18 @@ namespace hTunes
 
         private void StopButton_Click(object sender, RoutedEventArgs e)
         {
+            player.Stop();
+        }
+
+        private void PlaySongFromMenu_Click(object sender, RoutedEventArgs e)
+        {
+            var menuItem = (MenuItem)sender;
+            var contextMenu = (ContextMenu)menuItem.Parent;
+            var datagrid = (DataGrid)contextMenu.PlacementTarget;
+            var songToPlay = (Song)datagrid.SelectedCells[0].Item;
+
+            player.SoundLocation = songToPlay.Filename;
+            player.Play();
 
         }
 
