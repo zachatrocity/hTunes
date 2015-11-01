@@ -251,5 +251,4 @@ namespace hTunes
             startPoint = e.GetPosition(null);
         }
     }
-    }
 }
