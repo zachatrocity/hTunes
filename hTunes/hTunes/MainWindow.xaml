@@ -52,7 +52,7 @@
                 <Button x:Name="aboutButton" ToolTip="About" Height="32" VerticalAlignment="Top" Width="75" Click="aboutButton_Click">
                     <Image Source="about.png"></Image>
                 </Button>
-                <TextBox Height="32" Margin="0" TextWrapping="Wrap" Text="Search..." HorizontalAlignment="Right" VerticalAlignment="Top" Width="120" KeyDown="SearchBox_KeyDown" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" />
+                <TextBox Height="32" Margin="0" TextWrapping="Wrap" Text="Search..." HorizontalAlignment="Right" VerticalAlignment="Top" Width="120" KeyUp="SearchBox_KeyUp" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" />
             </ToolBar>
         </StackPanel>
 

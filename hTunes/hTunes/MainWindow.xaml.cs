@@ -39,6 +39,9 @@ namespace hTunes
                 ListBoxItem pl = new ListBoxItem();
                 pl.Content = play;
                 pl.AllowDrop = true;
+                pl.Drop += pl_Drop;
+                pl.DragOver += pl_DragOver;
+
                 pl.MouseLeftButtonUp += (obj, e) => { 
                     var playlist = obj as ListBoxItem;
                     populateDatagridWithPlaylist(playlist.Content.ToString()); 
@@ -49,6 +52,32 @@ namespace hTunes
             initializeContextMenus();
             playlistListBox.SelectedItem = playlistListBox.Items[0];
             populateDatagridWithAllMusic();
+        }
+
+        void pl_DragOver(object sender, DragEventArgs e)
+        {
+            // By default, don't allow dropping
+            e.Effects = DragDropEffects.None;
+
+            // If the DataObject contains string data, extract it
+            if (e.Data.GetDataPresent(DataFormats.StringFormat))
+            {
+                string dataString = (string)e.Data.GetData(DataFormats.StringFormat);
+
+                e.Effects = DragDropEffects.Copy;
+                
+            }
+
+        }
+
+        void pl_Drop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.StringFormat))
+            {
+                string dataString = (string)e.Data.GetData(DataFormats.StringFormat);
+
+                musicLib.AddSongToPlaylist(Convert.ToInt32(dataString), (sender as ListBoxItem).Content.ToString());
+            }
         }
 
         private void initializeContextMenus()
@@ -138,7 +167,8 @@ namespace hTunes
             if (musicDatagrid.SelectedIndex != -1)
             {
                 var songToPlay = musicDatagrid.SelectedItem as DataRowView;
-                player.Source = new Uri(songToPlay.Row.ItemArray[4].ToString());
+                Song sng = musicLib.GetSong(Convert.ToInt32(songToPlay.Row.ItemArray[0]));
+                player.Source = new Uri(sng.Filename);
                 try
                 {
                     player.Play();
@@ -159,8 +189,8 @@ namespace hTunes
         private void PlaySongFromMenu_Click(object sender, RoutedEventArgs e)
         {
             var songToPlay = musicDatagrid.SelectedItem as DataRowView;
-
-            player.Source = new Uri(songToPlay.Row.ItemArray[4].ToString());
+            Song sng = musicLib.GetSong(Convert.ToInt32(songToPlay.Row.ItemArray[0]));
+            player.Source = new Uri(sng.Filename);
             try
             {
                 player.Play();
@@ -184,12 +214,9 @@ namespace hTunes
 
         private void removeItemFromPlaylist_Click(object sender, RoutedEventArgs e)
         {
-            var menuItem = (MenuItem)sender;
-            var contextMenu = (ContextMenu)menuItem.Parent;
-            var datagrid = (DataGrid)contextMenu.PlacementTarget;
-            var songToRemove = (Song)datagrid.SelectedCells[0].Item;
+            var songToRemove = musicDatagrid.SelectedItem as DataRowView;
             var playlist = playlistListBox.SelectedItem as ListBoxItem;
-            musicLib.RemoveSongFromPlaylist(datagrid.SelectedIndex, songToRemove.Id, playlist.Content.ToString());
+            musicLib.RemoveSongFromPlaylist(musicDatagrid.SelectedIndex, Convert.ToInt32(songToRemove.Row.ItemArray[0]), playlist.Content.ToString());
             populateDatagridWithPlaylist(playlist.Content.ToString());
         }
 
@@ -203,7 +230,7 @@ namespace hTunes
             musicLib.PrintAllTables();
         }
 
-        private void SearchBox_KeyDown(object sender, KeyEventArgs e)
+        private void SearchBox_KeyUp(object sender, KeyEventArgs e)
         {
             TextBox tb = sender as TextBox;
             string search = tb.Text;
@@ -212,6 +239,14 @@ namespace hTunes
             {
                 //filter all music
                 DataTable filtered = musicLib.Songs;
+                filtered.DefaultView.RowFilter = " title like '%" + search + "%' or artist like '%" + search + "%' or album like '%" + search + "%' or genre like '%" + search + "%'";
+                musicDatagrid.ItemsSource = filtered.DefaultView;
+            }
+            else
+            {
+                //filter a playlist
+                ListBoxItem pl = playlistListBox.SelectedItem as ListBoxItem;
+                DataTable filtered = musicLib.SongsForPlaylist(pl.Content.ToString());
                 filtered.DefaultView.RowFilter = " title like '%" + search + "%' or artist like '%" + search + "%' or album like '%" + search + "%' or genre like '%" + search + "%'";
                 musicDatagrid.ItemsSource = filtered.DefaultView;
             }
@@ -241,7 +276,8 @@ namespace hTunes
                 Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance))
             {
                 //initiate dragging the text from the textbox
-                DragDrop.DoDragDrop(musicDatagrid, musicDatagrid.SelectedItem, DragDropEffects.Copy);
+                DataRowView song = musicDatagrid.SelectedItem as DataRowView;
+                DragDrop.DoDragDrop(musicDatagrid, song.Row.ItemArray[0].ToString(), DragDropEffects.Copy);
             }
         }
 
