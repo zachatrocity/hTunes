@@ -4,13 +4,13 @@ an itunes alternative
 
 
 #TODO
-1. A list box should list “All Music” and all playlists.  When All Music is selected, all the songs should be displayed in the data
-grid.  When a specific playlist is selected, only songs from that playlist should be displayed in the data grid.
+~~1. A list box should list “All Music” and all playlists.  When All Music is selected, all the songs should be displayed in the data
+grid.  When a specific playlist is selected, only songs from that playlist should be displayed in the data grid.~~
 
-2. Songs should be displayed in a data grid control that shows each song’s title, artist, album, and genre.   
+~~2. Songs should be displayed in a data grid control that shows each song’s title, artist, album, and genre.  ~~ 
 
-3. When a song is selected, a detail pane should display details about the song including a picture of the album cover which
-is obtained from last.fm.    
+~~3. When a song is selected, a detail pane should display details about the song including a picture of the album cover which
+is obtained from last.fm.    ~~
 
 4. A song can be played by selecting the song in the data grid pressing the Play button or by right‐clicking the song and
 selecting “Play” from the context menu.  The Stop button should stop play.  Other buttons that pause, change the
@@ -44,7 +44,7 @@ terminates.)
 10. Song information can be modified directly in the data grid when viewing All Music.  Song info should not be editable
 when viewing a playlist.
 
-11. The main window should be resizable, and the contents should stretch/shrink to fit the size of the window.
+~~11. The main window should be resizable, and the contents should stretch/shrink to fit the size of the window.~~
 
 12. There should be an About dialog box that identifies the programmers.
 

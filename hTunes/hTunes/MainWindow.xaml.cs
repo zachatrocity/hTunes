@@ -25,6 +25,24 @@ namespace hTunes
         public MainWindow()
         {
             InitializeComponent();
+            //add allmusic
+            ListBoxItem allMus = new ListBoxItem();
+            allMus.Content = "All Music";
+            allMus.MouseLeftButtonUp += (obj, e) => { populateDatagridWithAllMusic(); };
+            playlistListBox.Items.Add(allMus);
+
+            //add any existing playlists
+            foreach (var play in musicLib.Playlists)
+            {
+                ListBoxItem pl = new ListBoxItem();
+                pl.Content = play;
+                pl.MouseLeftButtonUp += (obj, e) => { 
+                    var playlist = obj as ListBoxItem;
+                    populateDatagridWithPlaylist(playlist.Content.ToString()); 
+                };
+                playlistListBox.Items.Add(pl);
+            }
+
             populateDatagridWithAllMusic();
         }
 
@@ -33,5 +51,36 @@ namespace hTunes
             // Bind the data source
             musicDatagrid.ItemsSource =  musicLib.Songs.DefaultView;
         }
+
+        public void populateDatagridWithPlaylist(string pl)
+        {
+            musicDatagrid.ItemsSource = musicLib.SongsForPlaylist(pl).DefaultView;
+        }
+
+        private void newPlaylistButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void openButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void aboutButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void PlayButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void StopButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
     }
 }
