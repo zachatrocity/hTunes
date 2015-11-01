@@ -98,7 +98,11 @@ namespace hTunes
 
             player.SoundLocation = songToPlay.Filename;
             player.Play();
+        }
 
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            musicLib.Save();
         }
 
     }
