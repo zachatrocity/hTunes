@@ -1,8 +1,6 @@
 # hTunes
 an itunes alternative
 
-
-
 #TODO
 ~~1. A list box should list “All Music” and all playlists.  When All Music is selected, all the songs should be displayed in the data
 grid.  When a specific playlist is selected, only songs from that playlist should be displayed in the data grid.~~
@@ -61,3 +59,11 @@ should also be available from the context menu that deletes the playlist.
 
 ~~3. Allow the user to enter a search string. As the string is being entered, the song list should be populated with any song
 whose title, artist, album, or genre match any part of the search string.  An empty search string should yield all songs.  ~~
+
+
+1. https://github.com/zachatrocity/hTunes/commits/master
+2. Brief summary of what the program does  
+3. List of any known bugs that still remain (hopefully none)
+4. List of any additional requirements that were implemented
+5. List what each teammate contributed (e.g., code to transform images, populate the list view, etc.)  
+6. The percentage of work performed by each teammate
