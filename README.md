@@ -36,10 +36,10 @@ playlist, right‐clicking the song, and selecting “Remove from Playlist” fr
 Note that the ordering of the songs in a playlist should be updated to reflect the removal of a song so if song at position 2
 was removed, the 3rd song is now position 2, the 4th is position 3, and so on.
 
-9. The list of all song files and playlists should be stored in a file called music.xml.  This file should reside in the same folder
+~~9. The list of all song files and playlists should be stored in a file called music.xml.  This file should reside in the same folder
 as the app’s .exe.  The file should be loaded when the app is first executed and saved when the app terminates.  (Ideally
 the file should be saved whenever a change is made to a song or playlist, but you should only save it once when the app
-terminates.)
+terminates.)~~
 
 10. Song information can be modified directly in the data grid when viewing All Music.  Song info should not be editable
 when viewing a playlist.

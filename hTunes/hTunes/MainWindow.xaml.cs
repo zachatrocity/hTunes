@@ -117,8 +117,8 @@ namespace hTunes
         {
             if (musicDatagrid.SelectedIndex != -1)
             {
-                var songToPlay = (Song)musicDatagrid.SelectedCells[0].Item;
-                player.SoundLocation = songToPlay.Filename;
+                var songToPlay = musicDatagrid.SelectedItem as DataRowView;
+                player.SoundLocation = songToPlay.Row.ItemArray[4].ToString();
                 player.Play();
             }
         }
@@ -130,23 +130,28 @@ namespace hTunes
 
         private void PlaySongFromMenu_Click(object sender, RoutedEventArgs e)
         {
-            var menuItem = (MenuItem)sender;
-            var contextMenu = (ContextMenu)menuItem.Parent;
-            var datagrid = (DataGrid)contextMenu.PlacementTarget;
-            var songToPlay = (Song)datagrid.SelectedCells[0].Item;
+            var songToPlay = musicDatagrid.SelectedItem as DataRowView;
 
-            player.SoundLocation = songToPlay.Filename;
-            player.Play();
+            player.SoundLocation = songToPlay.Row.ItemArray[4].ToString();
+            try
+            {
+                player.Play();
+            }
+            catch
+            {
+                Console.WriteLine("File may not exist");
+            }
         }
 
         private void removeItem_Click(object sender, RoutedEventArgs e)
         {
-            var menuItem = (MenuItem)sender;
-            var contextMenu = (ContextMenu)menuItem.Parent;
-            var datagrid = (DataGrid)contextMenu.PlacementTarget;
-            var songToRemove = (Song)datagrid.SelectedCells[0].Item;
-            musicLib.DeleteSong(songToRemove.Id);
-            populateDatagridWithAllMusic();
+            var songToRemove = musicDatagrid.SelectedItem as DataRowView;
+            MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Are you sure you wish to delete?", "Delete Confirmation", System.Windows.MessageBoxButton.YesNo);
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+                musicLib.DeleteSong((int)songToRemove.Row.ItemArray[0]);
+                populateDatagridWithAllMusic();
+            }
         }
 
         private void removeItemFromPlaylist_Click(object sender, RoutedEventArgs e)
