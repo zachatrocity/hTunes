@@ -216,7 +216,7 @@ namespace hTunes
         {
             var songToRemove = musicDatagrid.SelectedItem as DataRowView;
             var playlist = playlistListBox.SelectedItem as ListBoxItem;
-            musicLib.RemoveSongFromPlaylist(musicDatagrid.SelectedIndex, Convert.ToInt32(songToRemove.Row.ItemArray[0]), playlist.Content.ToString());
+            musicLib.RemoveSongFromPlaylist(musicDatagrid.SelectedIndex + 1, Convert.ToInt32(songToRemove.Row.ItemArray[0]), playlist.Content.ToString());
             populateDatagridWithPlaylist(playlist.Content.ToString());
         }
 
