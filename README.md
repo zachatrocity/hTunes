@@ -1,5 +1,6 @@
 #URL
 https://github.com/zachatrocity/hTunes/
+just add your music.xml and music.xsc to /bin/debug or /bin/release
 #Description
 A WPF application to create playlists and play music.  
 #Bugs
