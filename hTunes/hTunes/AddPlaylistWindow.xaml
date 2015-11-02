@@ -1,0 +1,10 @@
+﻿<Window x:Class="hTunes.AddPlaylistWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Add Playlist" Height="133" Width="397">
+    <StackPanel>
+        <TextBlock HorizontalAlignment="Center" Text="Add Playlist" />
+        <TextBox Margin="25,10,25,25" x:Name="playlistName" />
+        <Button Content="OK" Click="OKButton_Click" Margin="25,0,25,25" />
+    </StackPanel>
+</Window>

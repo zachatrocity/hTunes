@@ -28,6 +28,17 @@ namespace hTunes
         {
             InitializeComponent();
             //add allmusic
+            updatePlaylistBox();
+
+            initializeContextMenus();
+            playlistListBox.SelectedItem = playlistListBox.Items[0];
+            populateDatagridWithAllMusic();
+        }
+
+        void updatePlaylistBox()
+        {
+            playlistListBox.Items.Clear();
+
             ListBoxItem allMus = new ListBoxItem();
             allMus.Content = "All Music";
             allMus.MouseLeftButtonUp += (obj, e) => { populateDatagridWithAllMusic(); };
@@ -42,16 +53,13 @@ namespace hTunes
                 pl.Drop += pl_Drop;
                 pl.DragOver += pl_DragOver;
 
-                pl.MouseLeftButtonUp += (obj, e) => { 
+                pl.MouseLeftButtonUp += (obj, e) =>
+                {
                     var playlist = obj as ListBoxItem;
-                    populateDatagridWithPlaylist(playlist.Content.ToString()); 
+                    populateDatagridWithPlaylist(playlist.Content.ToString());
                 };
                 playlistListBox.Items.Add(pl);
             }
-
-            initializeContextMenus();
-            playlistListBox.SelectedItem = playlistListBox.Items[0];
-            populateDatagridWithAllMusic();
         }
 
         void pl_DragOver(object sender, DragEventArgs e)
@@ -131,7 +139,19 @@ namespace hTunes
 
         private void newPlaylistButton_Click(object sender, RoutedEventArgs e)
         {
+            AddPlaylistWindow addplaylist = new AddPlaylistWindow();
 
+            // Show testDialog as a modal dialog and determine if DialogResult = OK.
+            if (addplaylist.ShowDialog() == true)
+            {
+                // Read the contents of testDialog's TextBox.
+                if (addplaylist.PlaylistName != "")
+                {
+                    //add playlist
+                    musicLib.AddPlaylist(addplaylist.PlaylistName);
+                    updatePlaylistBox();
+                }
+            }
         }
 
         //http://stackoverflow.com/questions/10315188/open-file-dialog-and-select-a-file-using-wpf-controls-and-c-sharp
