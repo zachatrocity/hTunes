@@ -1,5 +1,5 @@
 #URL
-https://github.com/zachatrocity/hTunes/commits/master
+https://github.com/zachatrocity/hTunes/
 #Description
 A WPF application to create playlists and play music.  
 #Bugs
